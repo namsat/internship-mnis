@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="82 aziende, laboratori e programmi europei per summer internship di studenti MNIS: ruoli, retribuzioni, competitività e scadenze.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Mappa Internship MNIS</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: header + piano d'azione, poi filtri sticky e una "wafer map" di righe filtrabili */
+:root{
+  --bg:#f3f5f7; --surface:#ffffff; --fg:#17202a; --muted:#5b6876; --line:#d9dfe5;
+  --accent:#b4612a; --accent-soft:#f6e6da; --chip:#e8edf2;
+  --c1:#3d8b5f; --c2:#7a9a3a; --c3:#c99a1e; --c4:#d06a2a; --c5:#b8323a;
+  --display:"Familjen Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --body:"Public Sans", system-ui, -apple-system, Segoe UI, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#11161b; --surface:#182028; --fg:#e6ebf0; --muted:#97a4b2; --line:#2a3540;
+  --accent:#e09460; --accent-soft:#3a2a1f; --chip:#22303b;
+  --c1:#5fb985; --c2:#a3c25a; --c3:#e2b844; --c4:#ec8b4c; --c5:#e5636a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11161b; --surface:#182028; --fg:#e6ebf0; --muted:#97a4b2; --line:#2a3540;
+  --accent:#e09460; --accent-soft:#3a2a1f; --chip:#22303b;
+  --c1:#5fb985; --c2:#a3c25a; --c3:#e2b844; --c4:#ec8b4c; --c5:#e5636a; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:32px 64px;display:flex;flex-direction:column;gap:28px}
+h1,h2{font-family:var(--display);text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(28px,4.4vw,42px);line-height:1.08}
+h2{font-size:20px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.lede{max-width:68ch;color:var(--muted);margin:10px 0 0}
+.stats{display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--mono);font-size:13px;color:var(--muted)}
+.stats b{color:var(--fg);font-weight:500;font-variant-numeric:tabular-nums}
+.plan{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.step .when{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.04em}
+.step p{margin:0;font-size:14px}
+.notes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 28px;font-size:14px}
+.notes p{margin:0;max-width:65ch}
+.notes strong{font-weight:600}
+.filters{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.filters input,.filters select{font:inherit;font-size:14px;color:var(--fg);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:8px 10px;min-width:0}
+.filters input{flex:1 1 220px}
+.filters select{flex:0 1 auto}
+.filters :focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.count{font-family:var(--mono);font-size:13px;color:var(--muted);margin-left:auto;font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--muted);align-items:center}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.head,.row{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1.9fr) minmax(0,1fr) 92px minmax(0,1fr);gap:16px;align-items:start}
+.head{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:0 16px 6px}
+.list{display:flex;flex-direction:column;gap:8px}
+.row{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:14px 16px}
+.name{font-family:var(--display);font-weight:600;font-size:17px;line-height:1.2}
+.name a{color:inherit;text-decoration:none;border-bottom:1px solid transparent}
+.name a:hover{border-bottom-color:var(--accent)}
+.where{font-size:13px;color:var(--muted);margin-top:3px}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.tag{font-family:var(--mono);font-size:11px;background:var(--chip);padding:2px 6px;border-radius:4px;color:var(--muted)}
+.cc{background:var(--accent-soft);color:var(--accent)}
+.roles{font-size:14px}
+.fit{font-size:13px;color:var(--muted);margin-top:6px}
+.pay{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
+.src{display:inline-block;font-size:10px;letter-spacing:.06em;text-transform:uppercase;margin-top:4px;color:var(--muted)}
+.src.ok{color:var(--c1)}
+.when2{font-size:13px}
+.dies{display:flex;gap:3px;margin-top:2px}
+.dies i{width:12px;height:12px;border-radius:2px;background:var(--chip);display:block}
+.lvl{font-size:12px;color:var(--muted);margin-top:4px}
+.lab{display:none;font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:2px}
+.empty{padding:28px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:8px}
+.sources{font-size:13px;color:var(--muted)}
+.sources a{color:var(--accent)}
+@media (max-width:900px){
+  .plan{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .notes{grid-template-columns:minmax(0,1fr)}
+  .head{display:none}
+  .row{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px 16px}
+  .row > .c-name,.row > .c-roles{grid-column:1 / -1}
+  .lab{display:block}
+}
+@media (max-width:460px){.plan{grid-template-columns:minmax(0,1fr)}.count{margin-left:0}}
+@media (prefers-reduced-motion:no-preference){.row{transition:border-color .15s}.row:hover{border-color:var(--accent)}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Summer 2027 · MNIS PoliTo → Phelma → EPFL</div>
+    <h1>Mappa delle summer internship per micro e nanotecnologie</h1>
+    <p class="lede">82 aziende, laboratori e programmi in Europa dove un primo anno MNIS può candidarsi per l'estate 2027: semiconduttori, equipment, chip design, MEMS, fotonica, quantum e ricerca. Per ogni voce trovi ruoli tipici, retribuzione mensile lorda, finestra di candidatura e competitività.</p>
+  </header>
+
+  <div class="stats" id="stats"></div>
+
+  <section aria-labelledby="plan-h" style="display:flex;flex-direction:column;gap:12px">
+    <h2 id="plan-h">Quando candidarsi</h2>
+    <div class="plan">
+      <div class="step"><div class="when">ORA · nov–dic</div><p>Big tech e hardware USA (Google, Apple, NVIDIA, Arm, IBM Research, Qualcomm). Selezionano a rotazione: chi arriva tardi trova posti già assegnati.</p></div>
+      <div class="step"><div class="when">dic–gen</div><p>Programmi di ricerca: CERN Summer Student (chiude a fine gennaio), ETH SSRF, ESA. Servono lettera motivazionale e referenze dei professori.</p></div>
+      <div class="step"><div class="when">gen–mar</div><p>Grandi gruppi europei di semiconduttori: ST, Infineon, NXP, ASML, AMD, ADI, Bosch, Soitec. Pubblicano le offerte di stage estivo in questo periodo.</p></div>
+      <div class="step"><div class="when">mar–mag</div><p>Laboratori (CEA-Leti, FBK, Fraunhofer, CSEM), PMI svizzere e startup quantum. Funziona bene la candidatura spontanea diretta al responsabile di gruppo.</p></div>
+    </div>
+  </section>
+
+  <section class="notes" aria-label="Note pratiche">
+    <p><strong>Durata.</strong> Molte aziende europee di semiconduttori preferiscono stage di 4–6 mesi. Per l'estate chiedi esplicitamente 10–12 settimane (giugno–agosto/settembre): con il calendario MNIS il tuo spazio è tra la fine del semestre a Grenoble e l'inizio a Losanna.</p>
+    <p><strong>Contratto e permessi.</strong> In Francia serve una convention de stage (via Grenoble INP-Phelma o PoliTo). In Svizzera, da cittadino UE, uno stage fino a 3 mesi passa con la procedura di notifica. Nel Regno Unito serve un visto per stage anche da cittadino UE.</p>
+    <p><strong>Retribuzioni.</strong> Le cifre "verificate" vengono da fonti pubbliche 2026. Le altre sono stime per livello Master, paese e tipo di datore: usale per confrontare, non come offerta. Minimo legale francese 2026: 4,50 €/ora, circa 680–690 € al mese a tempo pieno.</p>
+    <p><strong>Integrazioni.</strong> Chiedi a PoliTo se puoi usare una borsa Erasmus+ Traineeship per uno stage all'estero: si aggiunge allo stipendio dell'azienda. Iscriviti anche alle bacheche JobTeaser di Grenoble INP, al career service PoliTo e a IAESTE.</p>
+  </section>
+
+  <div class="filters" role="search">
+    <input id="q" type="search" placeholder="Cerca azienda, ruolo, città…" aria-label="Cerca">
+    <select id="country" aria-label="Paese"></select>
+    <select id="sector" aria-label="Settore"></select>
+    <select id="comp" aria-label="Competitività">
+      <option value="">Ogni competitività</option>
+      <option value="2">Fino a moderata</option>
+      <option value="3">Fino ad alta</option>
+      <option value="4">Fino a molto alta</option>
+    </select>
+    <select id="sort" aria-label="Ordina">
+      <option value="comp">Ordina: più accessibili</option>
+      <option value="pay">Ordina: stipendio più alto</option>
+      <option value="name">Ordina: nome A–Z</option>
+      <option value="country">Ordina: paese</option>
+    </select>
+    <span class="count" id="count"></span>
+  </div>
+
+  <div class="legend" aria-label="Legenda competitività">
+    <span>Competitività:</span>
+    <span><span class="dies" id="lg1"></span>moderata</span>
+    <span><span class="dies" id="lg3"></span>alta</span>
+    <span><span class="dies" id="lg5"></span>estrema (&lt;5% accettati)</span>
+  </div>
+
+  <div>
+    <div class="head"><div>Azienda · sede</div><div>Ruoli e fit MNIS</div><div>Retribuzione mensile</div><div>Competitività</div><div>Candidature</div></div>
+    <div class="list" id="list"></div>
+  </div>
+
+  <footer class="sources">
+    <p>Fonti per le cifre verificate: <a href="https://asml.com/en/careers/students-graduates/asml-internship" target="_blank" rel="noopener">ASML internship</a> (600 € + 450 € alloggio per studenti UE), <a href="https://careers.cern/?p=14771" target="_blank" rel="noopener">CERN Summer Student 2026</a> (93 CHF/giorno), <a href="https://www.gradcracker.com/search/all-disciplines/work-placements-internships-with-cern" target="_blank" rel="noopener">CERN Technical Student</a> (3.486 CHF/mese), <a href="https://mynejo.com/de-at/job/summer-internship~2386bed7-e2b8-45c9-9842-e98a0ceb391c" target="_blank" rel="noopener">NXP Austria</a> (da 2.100 €), <a href="https://careers.amd.com/student-programs-emea" target="_blank" rel="noopener">AMD EMEA</a> (finestre gen–feb), <a href="https://www.ibani.com/en/guides/student-jobs-internships-switzerland" target="_blank" rel="noopener">guida stage Svizzera 2026</a> (2.000–3.500 CHF, tech fino a 4.500), <a href="https://salerya.fr/guides/gratification-stage/" target="_blank" rel="noopener">gratification de stage 2026</a>. Verifica sempre bando e scadenza sul sito dell'azienda.</p>
+  </footer>
+</div>
+
+<script>
+const CN={IT:"Italia",FR:"Francia",CH:"Svizzera",DE:"Germania",AT:"Austria",NL:"Paesi Bassi",BE:"Belgio",UK:"Regno Unito",IE:"Irlanda",FI:"Finlandia",SE:"Svezia",ES:"Spagna"};
+const LV=["","bassa","moderata","alta","molto alta","estrema"];
+// n nome, w sede, c paese, s settore, r ruoli, f fit, p paga, e €/mese stimati, v verificato, k competitività 1-5, t finestra, u sito
+const D=[
+// ITALIA
+{n:"STMicroelectronics Italia",w:"Agrate Brianza, Castelletto, Catania",c:"IT",s:"Semiconduttori",r:"Process & integration engineer, caratterizzazione dispositivi, design analogico/mixed-signal, MEMS, affidabilità",f:"Fit diretto con MNIS; Agrate e Catania hanno fab 300 mm e SiC.",p:"€800–1.200 (tirocinio)",e:1000,k:3,t:"gen–apr",u:"https://www.st.com"},
+{n:"Micron Italia",w:"Vimercate, Avezzano",c:"IT",s:"Semiconduttori",r:"Memory design, test engineering, product engineering",f:"Design center memorie NAND/DRAM.",p:"€800–1.100",e:950,k:2,t:"gen–apr",u:"https://www.micron.com"},
+{n:"LFoundry",w:"Avezzano",c:"IT",s:"Semiconduttori",r:"Process engineering, CMOS image sensor, yield",f:"Foundry specializzata in sensori d'immagine.",p:"€600–900",e:750,k:2,t:"tutto l'anno",u:"https://www.lfoundry.com"},
+{n:"Technoprobe",w:"Cernusco Lombardone (LC)",c:"IT",s:"MEMS & sensori",r:"R&D probe card, processi MEMS, materiali, test",f:"Leader mondiale probe card; microfabbricazione pura.",p:"€800–1.000",e:900,k:2,t:"tutto l'anno",u:"https://www.technoprobe.com"},
+{n:"Infineon Italia",w:"Padova, Milano",c:"IT",s:"Chip design & EDA",r:"Design analogico e di potenza, verifica, layout",f:"Design center su power management e automotive.",p:"€900–1.200",e:1050,k:3,t:"gen–apr",u:"https://www.infineon.com"},
+{n:"FBK – Fondazione Bruno Kessler",w:"Trento",c:"IT",s:"Ricerca",r:"Sensori, SiPM, MEMS, camera pulita, caratterizzazione",f:"Cleanroom completa, molto aperta a tirocini.",p:"€600–900",e:750,k:2,t:"tutto l'anno",u:"https://www.fbk.eu"},
+{n:"IIT – Istituto Italiano di Tecnologia",w:"Genova, Torino, Milano",c:"IT",s:"Ricerca",r:"Nanomateriali, elettronica stampata, dispositivi per l'energia",f:"Il centro di Torino è comodo durante il semestre a PoliTo.",p:"€600–1.000",e:800,k:2,t:"tutto l'anno",u:"https://www.iit.it"},
+{n:"Thales Alenia Space Italia",w:"Torino, Roma, L'Aquila",c:"IT",s:"Energia & aerospazio",r:"Elettronica RF/microonde, payload, qualifica componenti",f:"Componentistica per lo spazio, sede a Torino.",p:"€800–1.000",e:900,k:2,t:"gen–apr",u:"https://www.thalesaleniaspace.com"},
+{n:"Leonardo",w:"Roma, Campi Bisenzio, Nerviano",c:"IT",s:"Energia & aerospazio",r:"MMIC GaAs/GaN, elettronica di difesa, sensori",f:"Ha una fonderia interna di semiconduttori composti a Roma.",p:"€800–1.000",e:900,k:2,t:"gen–apr",u:"https://www.leonardo.com"},
+// FRANCIA
+{n:"STMicroelectronics France",w:"Crolles, Grenoble, Rousset, Tours",c:"FR",s:"Semiconduttori",r:"Integrazione FD-SOI, caratterizzazione, metrologia, design, affidabilità",f:"Crolles è a 20 minuti da Phelma: ideale durante il semestre a Grenoble.",p:"€700–1.300",e:1000,k:3,t:"nov–mar",u:"https://www.st.com"},
+{n:"Soitec",w:"Bernin (Grenoble)",c:"FR",s:"Semiconduttori",r:"Process engineering SOI/SiC, caratterizzazione materiali, R&D substrati",f:"Inventore del Smart Cut: fisica dei materiali applicata.",p:"€900–1.300",e:1100,k:3,t:"nov–feb",u:"https://www.soitec.com"},
+{n:"CEA-Leti",w:"Grenoble",c:"FR",s:"Ricerca",r:"Nanofabbricazione, fotonica su silicio, integrazione 3D, MEMS, qubit di spin",f:"Il riferimento europeo per MNIS; molte offerte di stage pubblicate.",p:"€700–1.300 (scala CEA)",e:1000,k:3,t:"ott–feb",u:"https://www.leti-cea.com"},
+{n:"Laboratori CNRS (LTM, IMEP-LaHC, Néel, C2N)",w:"Grenoble, Palaiseau",c:"FR",s:"Ricerca",r:"Stage di ricerca su dispositivi, litografia, nanofotonica",f:"Contatta direttamente i ricercatori; ottimi per una futura tesi.",p:"~€690 (minimo legale)",e:690,v:1,k:2,t:"tutto l'anno",u:"https://www.cnrs.fr"},
+{n:"Lynred",w:"Veurey-Voroize (Grenoble)",c:"FR",s:"MEMS & sensori",r:"Rivelatori infrarossi, process, test elettro-ottico",f:"Sensori IR per spazio e difesa.",p:"€900–1.200",e:1050,k:2,t:"nov–mar",u:"https://www.lynred.com"},
+{n:"Teledyne e2v",w:"Saint-Égrève (Grenoble)",c:"FR",s:"Semiconduttori",r:"Sensori d'immagine CMOS, design, test e qualifica",f:"Image sensor per spazio e scienza.",p:"€900–1.200",e:1050,k:2,t:"nov–mar",u:"https://www.teledyne.com"},
+{n:"Tronics (TDK)",w:"Crolles",c:"FR",s:"MEMS & sensori",r:"Processi MEMS, design di inerziali, test",f:"MEMS ad alte prestazioni, piccolo team.",p:"€800–1.100",e:950,k:2,t:"tutto l'anno",u:"https://www.tronicsgroup.com"},
+{n:"Siemens EDA",w:"Montbonnot (Grenoble)",c:"FR",s:"Chip design & EDA",r:"Software EDA, verifica, modellazione",f:"Adatto se ti piace la parte software del design.",p:"€1.000–1.400",e:1200,k:3,t:"nov–mar",u:"https://www.sw.siemens.com"},
+{n:"Prophesee",w:"Parigi",c:"FR",s:"MEMS & sensori",r:"Sensori di visione event-based, design pixel, caratterizzazione",f:"Startup deep-tech su sensori neuromorfici.",p:"€1.000–1.400",e:1200,k:3,t:"tutto l'anno",u:"https://www.prophesee.ai"},
+{n:"Thales Research & Technology / III-V Lab",w:"Palaiseau",c:"FR",s:"Ricerca",r:"GaN, fotonica, componenti RF, tecnologie quantistiche",f:"Ricerca industriale su semiconduttori composti.",p:"€900–1.300",e:1100,k:3,t:"nov–mar",u:"https://www.thalesgroup.com"},
+{n:"Schneider Electric",w:"Grenoble, Eybens",c:"FR",s:"Energia & aerospazio",r:"Elettronica di potenza, sensori, hardware R&D",f:"Grande sede R&D a Grenoble.",p:"€1.000–1.400",e:1200,k:2,t:"nov–mar",u:"https://www.se.com"},
+{n:"Quobly",w:"Grenoble",c:"FR",s:"Quantum",r:"Qubit di spin su FD-SOI, misure criogeniche, design",f:"Spin-off CEA/CNRS: il quantum più vicino al percorso MNIS.",p:"€900–1.300",e:1100,k:3,t:"tutto l'anno",u:"https://www.quobly.io"},
+{n:"Quandela",w:"Massy",c:"FR",s:"Quantum",r:"Sorgenti di fotoni singoli, nanofabbricazione, fotonica",f:"Usa quantum dot in cavità micropillar.",p:"€1.000–1.400",e:1200,k:3,t:"tutto l'anno",u:"https://www.quandela.com"},
+{n:"Pasqal",w:"Massy",c:"FR",s:"Quantum",r:"Hardware ad atomi neutri, ottica, controllo",f:"Più fisica atomica che microfabbricazione.",p:"€1.000–1.400",e:1200,k:3,t:"tutto l'anno",u:"https://www.pasqal.com"},
+{n:"Alice & Bob",w:"Parigi",c:"FR",s:"Quantum",r:"Qubit superconduttivi, nanofabbricazione, misure criogeniche",f:"Team piccolo e selettivo.",p:"€1.200–1.600",e:1400,k:4,t:"tutto l'anno",u:"https://alice-bob.com"},
+// SVIZZERA
+{n:"CERN – Summer Student Programme",w:"Meyrin (Ginevra)",c:"CH",s:"Programmi",r:"Progetto in un gruppo di ricerca: elettronica, rivelatori, microelettronica, calcolo",f:"8–13 settimane con ciclo di lezioni; perfetto per l'estate.",p:"93 CHF/giorno esentasse + viaggio (2026)",e:2900,v:1,k:5,t:"apre ~nov, chiude fine gen",u:"https://home.cern"},
+{n:"CERN – Technical Student",w:"Meyrin (Ginevra)",c:"CH",s:"Programmi",r:"Elettronica, ASIC, rivelatori, fisica applicata",f:"Minimo 4 mesi: va bene solo se riesci a estendere oltre l'estate.",p:"3.486 CHF/mese esentasse",e:3700,v:1,k:4,t:"due scadenze l'anno",u:"https://home.cern"},
+{n:"ETH Zurich – Student Summer Research Fellowship",w:"Zurigo",c:"CH",s:"Programmi",r:"Ricerca estiva in un laboratorio ETH",f:"Riservato a studenti non ETH; importo della borsa sul bando.",p:"Borsa mensile (vedi bando)",e:1800,k:5,t:"inverno (verifica bando)",u:"https://ethz.ch"},
+{n:"PSI – Paul Scherrer Institut",w:"Villigen",c:"CH",s:"Ricerca",r:"Micro e nanotecnologia, rivelatori, litografia a raggi X",f:"Ha una cleanroom e la sorgente di luce di sincrotrone SLS.",p:"2.000–2.500 CHF",e:2400,k:3,t:"tutto l'anno",u:"https://www.psi.ch"},
+{n:"IBM Research Zurich",w:"Rüschlikon",c:"CH",s:"Big Tech",r:"Nanotecnologia, fotonica, hardware quantistico, hardware per AI",f:"Binnig e Rohrer, cleanroom di livello mondiale.",p:"3.000–4.500 CHF",e:4000,k:5,t:"ott–gen",u:"https://research.ibm.com"},
+{n:"Google Zurich",w:"Zurigo",c:"CH",s:"Big Tech",r:"Software engineering intern, hardware intern (quando aperto)",f:"Fit tecnico basso, ma stipendio e CV molto alti.",p:"7.000–9.000 CHF",e:8500,k:5,t:"set–dic (aperte ora)",u:"https://careers.google.com"},
+{n:"CSEM",w:"Neuchâtel, Alpnach",c:"CH",s:"Ricerca",r:"MEMS, fotonica, design IC ultra-low-power, fotovoltaico",f:"Centro di ricerca applicata, collegato a EPFL.",p:"2.000–3.000 CHF",e:2700,k:3,t:"tutto l'anno",u:"https://www.csem.ch"},
+{n:"EM Microelectronic (Swatch Group)",w:"Marin (Neuchâtel)",c:"CH",s:"Chip design & EDA",r:"Design IC ultra-low-power, test, RFID/BLE",f:"Fab propria, a un'ora da Losanna.",p:"2.000–3.000 CHF",e:2700,k:2,t:"gen–apr",u:"https://www.emmicroelectronic.com"},
+{n:"Melexis",w:"Bevaix (Neuchâtel)",c:"CH",s:"MEMS & sensori",r:"Sensori magnetici e di pressione, design mixed-signal",f:"Sensori automotive, team svizzero di design.",p:"2.000–3.000 CHF",e:2700,k:2,t:"gen–apr",u:"https://www.melexis.com"},
+{n:"Sensirion",w:"Stäfa",c:"CH",s:"MEMS & sensori",r:"Sensori MEMS di gas, flusso e umidità, process engineering",f:"Produttore svizzero di sensori CMOS-MEMS.",p:"2.500–3.500 CHF",e:3200,k:3,t:"gen–apr",u:"https://sensirion.com"},
+{n:"u-blox",w:"Thalwil",c:"CH",s:"Chip design & EDA",r:"Design RF/GNSS, verifica, validazione",f:"Chip di posizionamento e connettività.",p:"2.500–3.500 CHF",e:3200,k:3,t:"gen–apr",u:"https://www.u-blox.com"},
+{n:"Logitech",w:"Losanna",c:"CH",s:"Big Tech",r:"Hardware engineering, sensori, prototipazione",f:"Comodo se resti a Losanna dopo l'EPFL.",p:"2.500–3.500 CHF",e:3200,k:4,t:"dic–mar",u:"https://www.logitech.com"},
+{n:"Hitachi Energy",w:"Lenzburg, Baden",c:"CH",s:"Semiconduttori",r:"Semiconduttori di potenza SiC/IGBT, packaging, caratterizzazione",f:"Fab di dispositivi di potenza a Lenzburg.",p:"2.500–3.200 CHF",e:3000,k:3,t:"gen–apr",u:"https://www.hitachienergy.com"},
+{n:"ABB Corporate Research",w:"Baden-Dättwil",c:"CH",s:"Energia & aerospazio",r:"Elettronica di potenza, sensori, materiali",f:"Ricerca industriale vicino a Zurigo.",p:"2.500–3.200 CHF",e:3000,k:3,t:"gen–apr",u:"https://www.abb.com"},
+{n:"Lumentum",w:"Zurigo",c:"CH",s:"Fotonica & laser",r:"Diodi laser, process engineering, test ottico",f:"Fab di laser semiconduttori.",p:"2.500–3.500 CHF",e:3200,k:3,t:"tutto l'anno",u:"https://www.lumentum.com"},
+{n:"Coherent",w:"Zurigo",c:"CH",s:"Fotonica & laser",r:"Diodi laser ad alta potenza, epitassia, affidabilità",f:"Semiconduttori composti III-V.",p:"2.500–3.500 CHF",e:3200,k:3,t:"tutto l'anno",u:"https://www.coherent.com"},
+{n:"LIGENTEC",w:"Ecublens (Losanna)",c:"CH",s:"Fotonica & laser",r:"Fotonica integrata in nitruro di silicio, process, test",f:"Spin-off EPFL accanto al campus.",p:"2.000–3.000 CHF",e:2700,k:3,t:"tutto l'anno",u:"https://www.ligentec.com"},
+{n:"Zurich Instruments",w:"Zurigo",c:"CH",s:"Quantum",r:"Strumentazione di misura, controllo qubit, FPGA",f:"Strumenti usati in quasi tutti i lab quantum.",p:"2.500–3.500 CHF",e:3200,k:3,t:"tutto l'anno",u:"https://www.zhinst.com"},
+{n:"Synopsys (TCAD)",w:"Zurigo",c:"CH",s:"Chip design & EDA",r:"Simulazione TCAD di dispositivi e processi (Sentaurus)",f:"Ottimo se ti piace la fisica dei dispositivi simulata.",p:"2.500–3.500 CHF",e:3200,k:3,t:"dic–mar",u:"https://www.synopsys.com"},
+// GERMANIA
+{n:"Infineon Germania",w:"Monaco, Dresda, Regensburg",c:"DE",s:"Semiconduttori",r:"Process engineering, power devices, design, test",f:"Dresda ha la nuova Smart Power Fab.",p:"€1.800–2.200",e:2000,k:3,t:"gen–apr",u:"https://www.infineon.com"},
+{n:"Bosch / Bosch Sensortec",w:"Reutlingen, Dresda",c:"DE",s:"MEMS & sensori",r:"MEMS, wafer fab, caratterizzazione, SiC",f:"Uno dei più grandi produttori MEMS al mondo.",p:"€1.800–2.200",e:2000,k:3,t:"gen–apr",u:"https://www.bosch.com"},
+{n:"GlobalFoundries",w:"Dresda",c:"DE",s:"Semiconduttori",r:"Process e integrazione 22FDX, yield, metrologia",f:"Fab 300 mm FD-SOI.",p:"€1.600–2.000",e:1800,k:3,t:"gen–apr",u:"https://gf.com"},
+{n:"ESMC (joint venture TSMC)",w:"Dresda",c:"DE",s:"Semiconduttori",r:"Process engineering, avvio della nuova fab",f:"Fab in costruzione; occasioni crescenti.",p:"€1.700–2.200",e:1950,k:3,t:"gen–apr",u:"https://www.tsmc.com"},
+{n:"X-FAB",w:"Erfurt, Dresda, Itzehoe",c:"DE",s:"Semiconduttori",r:"Foundry analog/mixed-signal, MEMS, process engineering",f:"Foundry specializzata, accessibile.",p:"€1.500–1.900",e:1700,k:2,t:"tutto l'anno",u:"https://www.xfab.com"},
+{n:"Texas Instruments",w:"Freising",c:"DE",s:"Semiconduttori",r:"Process, product engineering, design analogico",f:"Fab e design center vicino a Monaco.",p:"€1.800–2.200",e:2000,k:3,t:"gen–mar",u:"https://www.ti.com"},
+{n:"ZEISS SMT",w:"Oberkochen",c:"DE",s:"Equipment & litografia",r:"Ottica EUV, metrologia, fisica delle superfici",f:"Ottiche delle macchine EUV di ASML.",p:"€1.800–2.200",e:2000,k:4,t:"gen–apr",u:"https://www.zeiss.com"},
+{n:"TRUMPF",w:"Ditzingen",c:"DE",s:"Equipment & litografia",r:"Laser per sorgenti EUV, fotonica, ottica",f:"Il laser della litografia EUV.",p:"€1.600–2.000",e:1800,k:3,t:"gen–apr",u:"https://www.trumpf.com"},
+{n:"Fraunhofer (IPMS, IZM, ISIT)",w:"Dresda, Berlino, Itzehoe",c:"DE",s:"Ricerca",r:"MEMS, packaging, integrazione eterogenea",f:"Ricerca applicata con cleanroom.",p:"€1.000–1.500",e:1250,k:2,t:"tutto l'anno",u:"https://www.fraunhofer.de"},
+{n:"Apple",w:"Monaco",c:"DE",s:"Big Tech",r:"Hardware intern: silicon design, power management, validazione",f:"Design center per i chip Apple.",p:"€3.000–4.000",e:3500,k:5,t:"ott–gen",u:"https://jobs.apple.com"},
+{n:"NVIDIA",w:"Monaco, Würselen",c:"DE",s:"Big Tech",r:"ASIC design, verifica, architettura",f:"Più digitale che dispositivi.",p:"€2.500–3.500",e:3000,k:5,t:"ott–gen",u:"https://www.nvidia.com"},
+{n:"AMD",w:"Monaco, Dresda, Cambridge (UK)",c:"DE",s:"Chip design & EDA",r:"Design, verifica, validazione silicio",f:"Programma estivo strutturato in EMEA.",p:"€2.000–2.800",e:2400,k:4,t:"gen–feb",v:0,u:"https://careers.amd.com"},
+{n:"Qualcomm",w:"Monaco, Norimberga",c:"DE",s:"Chip design & EDA",r:"RF design, modem, verifica",f:"RF front-end e connettività.",p:"€2.000–2.800",e:2400,k:4,t:"nov–feb",u:"https://www.qualcomm.com"},
+{n:"Cadence",w:"Monaco",c:"DE",s:"Chip design & EDA",r:"Application engineering EDA, design analogico",f:"Vicino agli strumenti che userai in tesi.",p:"€1.800–2.400",e:2100,k:3,t:"dic–mar",u:"https://www.cadence.com"},
+{n:"TDK-Micronas",w:"Friburgo",c:"DE",s:"MEMS & sensori",r:"Sensori Hall, design, test",f:"Sensori magnetici automotive con fab propria.",p:"€1.500–1.900",e:1700,k:2,t:"tutto l'anno",u:"https://www.micronas.tdk.com"},
+{n:"Huawei Research",w:"Monaco",c:"DE",s:"Big Tech",r:"Ottica, fotonica, hardware di comunicazione",f:"Centri di ricerca europei.",p:"€2.000–2.800",e:2400,k:3,t:"tutto l'anno",u:"https://www.huawei.com"},
+// AUSTRIA
+{n:"Infineon Austria",w:"Villach, Graz",c:"AT",s:"Semiconduttori",r:"Process engineering, power devices, design, test",f:"Villach è la fab principale per i dispositivi di potenza.",p:"€2.000–2.400",e:2200,k:3,t:"gen–apr",u:"https://www.infineon.com"},
+{n:"NXP Austria",w:"Gratkorn (Graz)",c:"AT",s:"Semiconduttori",r:"Lab validation, NFC automotive, sicurezza, system validation",f:"Programma estivo con offerte dedicate.",p:"da €2.100",e:2100,v:1,k:3,t:"gen–mar",u:"https://www.nxp.com"},
+{n:"ams OSRAM",w:"Premstätten, Regensburg (DE)",c:"AT",s:"Fotonica & laser",r:"Optoelettronica, sensori ottici, LED, process",f:"Sensori ottici e LED.",p:"€1.900–2.200",e:2050,k:3,t:"gen–apr",u:"https://ams-osram.com"},
+{n:"Lam Research",w:"Villach",c:"AT",s:"Equipment & litografia",r:"Wet processing, process engineering, sviluppo equipment",f:"Equipment per la pulizia del wafer.",p:"€1.900–2.300",e:2100,k:3,t:"gen–apr",u:"https://www.lamresearch.com"},
+{n:"Silicon Austria Labs",w:"Villach, Graz, Linz",c:"AT",s:"Ricerca",r:"MEMS, sensori, elettronica di potenza, RF",f:"Centro di ricerca con cleanroom.",p:"€1.800–2.200",e:2000,k:2,t:"tutto l'anno",u:"https://silicon-austria-labs.com"},
+// PAESI BASSI / BELGIO
+{n:"ASML",w:"Veldhoven",c:"NL",s:"Equipment & litografia",r:"Metrologia, ottica, meccatronica, fisica EUV, data",f:"Stage da 3 a 12 mesi, quasi tutti di 5–6: chiedi una versione breve.",p:"€600 + €450 alloggio (studenti UE)",e:1050,v:1,k:4,t:"rolling, 6 mesi prima",u:"https://www.asml.com"},
+{n:"NXP Paesi Bassi",w:"Eindhoven, Nijmegen",c:"NL",s:"Semiconduttori",r:"Design, validazione, RF, sicurezza",f:"Sede principale R&D.",p:"€600–900",e:750,k:3,t:"gen–apr",u:"https://www.nxp.com"},
+{n:"Axelera AI",w:"Eindhoven",c:"NL",s:"Chip design & EDA",r:"Design di acceleratori AI, verifica",f:"Startup di chip AI in rapida crescita.",p:"€600–1.000",e:800,k:3,t:"tutto l'anno",u:"https://www.axelera.ai"},
+{n:"SMART Photonics",w:"Eindhoven",c:"NL",s:"Fotonica & laser",r:"Foundry fotonica InP, process engineering",f:"Fotonica integrata a semiconduttore composto.",p:"€500–800",e:650,k:2,t:"tutto l'anno",u:"https://smartphotonics.nl"},
+{n:"ESA – ESTEC",w:"Noordwijk",c:"NL",s:"Programmi",r:"Componenti per lo spazio, qualifica, microelettronica",f:"Solo cittadini degli Stati membri (l'Italia lo è).",p:"Borsa mensile ESA (vedi bando)",e:1500,k:4,t:"campagne periodiche",u:"https://www.esa.int"},
+{n:"imec",w:"Lovanio",c:"BE",s:"Ricerca",r:"Processi avanzati, dispositivi, fotonica, sensori, 2D materials",f:"Il centro di ricerca sui semiconduttori più grande d'Europa.",p:"Rimborso variabile",e:700,k:4,t:"tutto l'anno",u:"https://www.imec-int.com"},
+// UK / IRLANDA
+{n:"Arm",w:"Cambridge",c:"UK",s:"Chip design & EDA",r:"Architettura CPU, verifica, implementazione fisica",f:"Serve un visto per stage dal Regno Unito.",p:"£2.300–2.800",e:2950,k:5,t:"ott–gen",u:"https://careers.arm.com"},
+{n:"Analog Devices",w:"Limerick (IE), Edimburgo (UK)",c:"IE",s:"Semiconduttori",r:"Design analogico, process, test, applicazioni",f:"Limerick ha fab e design center.",p:"€2.000–2.600",e:2300,k:4,t:"nov–feb",u:"https://www.analog.com"},
+{n:"Intel",w:"Leixlip",c:"IE",s:"Semiconduttori",r:"Process engineering, yield, equipment",f:"Fab avanzata; il piano di assunzioni cambia spesso.",p:"€2.000–2.600",e:2300,k:4,t:"nov–feb",u:"https://jobs.intel.com"},
+{n:"Tyndall National Institute",w:"Cork",c:"IE",s:"Ricerca",r:"Fotonica, MEMS, nanoelettronica",f:"Ha anche programmi estivi per studenti.",p:"€1.000–1.500",e:1250,k:2,t:"gen–apr",u:"https://www.tyndall.ie"},
+{n:"Oxford Instruments",w:"Bristol, Abingdon",c:"UK",s:"Equipment & litografia",r:"Etching e deposizione al plasma, ALD, criogenia",f:"Equipment per la nanofabbricazione.",p:"£1.900–2.300",e:2450,k:2,t:"gen–apr",u:"https://www.oxinst.com"},
+// NORDICI / SPAGNA
+{n:"Murata Electronics",w:"Vantaa",c:"FI",s:"MEMS & sensori",r:"Giroscopi e accelerometri MEMS, process, test",f:"Programma estivo finlandese molto strutturato.",p:"€2.200–2.700",e:2450,k:3,t:"gen–feb",u:"https://www.murata.com"},
+{n:"Okmetic",w:"Vantaa",c:"FI",s:"Semiconduttori",r:"Wafer di silicio e SOI, R&D materiali",f:"Substrati per MEMS e sensori.",p:"€2.000–2.500",e:2250,k:2,t:"gen–feb",u:"https://www.okmetic.com"},
+{n:"IQM Quantum Computers",w:"Espoo, Monaco",c:"FI",s:"Quantum",r:"Qubit superconduttivi, nanofabbricazione, test criogenico",f:"Fab quantum propria in Finlandia.",p:"€2.500–3.200",e:2850,k:4,t:"nov–feb",u:"https://www.meetiqm.com"},
+{n:"Nokia Bell Labs",w:"Espoo, Parigi-Saclay, Anversa",c:"FI",s:"Big Tech",r:"Fotonica, RF, ricerca hardware",f:"Ricerca su ottica e comunicazioni.",p:"€2.000–2.800",e:2400,k:4,t:"nov–feb",u:"https://www.nokia.com"},
+{n:"Ericsson",w:"Stoccolma, Lund",c:"SE",s:"Chip design & EDA",r:"ASIC e RF design, hardware radio",f:"Hardware per stazioni radio base.",p:"SEK 25.000–30.000",e:2400,k:3,t:"dic–feb",u:"https://www.ericsson.com"},
+{n:"Silex Microsystems",w:"Järfälla (Stoccolma)",c:"SE",s:"MEMS & sensori",r:"Foundry MEMS, process engineering",f:"Una delle maggiori foundry MEMS pure-play.",p:"SEK 25.000–28.000",e:2300,k:2,t:"gen–apr",u:"https://www.silexmicrosystems.com"},
+{n:"Semidynamics",w:"Barcellona",c:"ES",s:"Chip design & EDA",r:"Core RISC-V, verifica, design digitale",f:"Scale-up europea che recluta studenti.",p:"€1.000–1.400",e:1200,k:3,t:"tutto l'anno",u:"https://semidynamics.com"}
+];
+
+const $=id=>document.getElementById(id);
+function dies(k){let h="";for(let i=1;i<=5;i++)h+=`<i style="background:${i<=k?`var(--c${k})`:"var(--chip)"}"></i>`;return h}
+["lg1","lg3","lg5"].forEach((id,i)=>$(id).innerHTML=dies([2,3,5][i]));
+
+const countries=[...new Set(D.map(d=>d.c))];
+$("country").innerHTML=`<option value="">Tutti i paesi</option>`+countries.map(c=>`<option value="${c}">${CN[c]} (${D.filter(d=>d.c===c).length})</option>`).join("");
+const sectors=[...new Set(D.map(d=>d.s))].sort();
+$("sector").innerHTML=`<option value="">Tutti i settori</option>`+sectors.map(s=>`<option>${s}</option>`).join("");
+$("stats").innerHTML=`<span><b>${D.length}</b> aziende e programmi</span><span><b>${countries.length}</b> paesi</span><span><b>${D.filter(d=>d.k<=2).length}</b> a competitività moderata</span><span><b>${D.filter(d=>d.v).length}</b> retribuzioni verificate</span>`;
+
+function esc(s){return String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]))}
+function render(){
+  const q=$("q").value.trim().toLowerCase(),c=$("country").value,s=$("sector").value,k=+$("comp").value||9,so=$("sort").value;
+  let r=D.filter(d=>(!c||d.c===c)&&(!s||d.s===s)&&d.k<=k&&(!q||[d.n,d.w,d.r,d.f,d.s,CN[d.c]].join(" ").toLowerCase().includes(q)));
+  const by={comp:(a,b)=>a.k-b.k||b.e-a.e,pay:(a,b)=>b.e-a.e,name:(a,b)=>a.n.localeCompare(b.n),country:(a,b)=>CN[a.c].localeCompare(CN[b.c])||a.k-b.k}[so];
+  r.sort(by);
+  $("count").textContent=`${r.length} di ${D.length}`;
+  $("list").innerHTML=r.length?r.map(d=>`<article class="row">
+    <div class="c-name"><div class="name"><a href="${d.u}" target="_blank" rel="noopener">${esc(d.n)}</a></div><div class="where">${esc(d.w)}</div><div class="tags"><span class="tag cc">${CN[d.c]}</span><span class="tag">${esc(d.s)}</span></div></div>
+    <div class="c-roles"><div class="lab">Ruoli</div><div class="roles">${esc(d.r)}</div><div class="fit">${esc(d.f)}</div></div>
+    <div><div class="lab">Retribuzione</div><div class="pay">${esc(d.p)}</div><span class="src ${d.v?"ok":""}">${d.v?"verificata 2026":"stima"}</span></div>
+    <div><div class="lab">Competitività</div><div class="dies" aria-label="competitività ${LV[d.k]}">${dies(d.k)}</div><div class="lvl">${LV[d.k]}</div></div>
+    <div><div class="lab">Candidature</div><div class="when2">${esc(d.t)}</div></div>
+  </article>`).join(""):`<div class="empty">Nessuna voce con questi filtri. Prova ad allargare paese o competitività.</div>`;
+}
+["q","country","sector","comp","sort"].forEach(id=>$(id).addEventListener("input",render));
+render();
+</script>
+
+</body>
+</html>
